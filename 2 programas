@@ -1,0 +1,144 @@
+Crear un programa que maneje N° cantidad de datos de tipo real en una lista. Una vez cargados los datos en lista, el programa debe calcular el promedio de todos los datos cargados. Posteriormente, el programa debe cargar los datos menores o igual al promedio en una segunda lista, y los mayores en una tercera lista. Al finalizar este proceso, el programa debe mostrar lo siguiente:
+a.	Los datos cargados en Los datos cargados en la lista principal. lista principal.
+b.	El promedio.
+c.	Los datos cuyo valor sea igual o menor al promedio de todos los datos.
+d.	Los datos que sean mayores al promedio de todos los datos.
+El programa maneja una cantidad N de datos reales en una lista, calcula el promedio, separa los datos en dos listas (menores o iguales al promedio y mayores al promedio), y finalmente muestra la información solicitada.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+class Program
+{
+    static void Main()
+    {
+        List<double> listaPrincipal = new List<double>();
+        List<double> listaMenoresIgual = new List<double>();
+        List<double> listaMayores = new List<double>();
+        Console.WriteLine("Ingrese la cantidad de datos:");
+        int cantidadDatos = int.Parse(Console.ReadLine());
+        for (int i = 0; i < cantidadDatos; i++)
+        {
+            Console.WriteLine($"Ingrese el dato {i + 1}:");
+            double dato = double.Parse(Console.ReadLine());
+            listaPrincipal.Add(dato);
+        }
+        // Calcula el promedio
+        double promedio = listaPrincipal.Average();
+        // Clasifica los datos
+        foreach (double dato in listaPrincipal)
+        {
+            if (dato <= promedio)
+            {
+                listaMenoresIgual.Add(dato);
+            }
+            else
+            {
+                listaMayores.Add(dato);
+            }
+        }
+        // Muestra los resultados
+        Console.WriteLine("\nDatos cargados en la lista principal:");
+        MostrarLista(listaPrincipal);
+        Console.WriteLine($"\nPromedio de los datos: {promedio}");
+        Console.WriteLine("\nDatos menores o iguales al promedio:");
+        MostrarLista(listaMenoresIgual);
+        Console.WriteLine("\nDatos mayores al promedio:");
+        MostrarLista(listaMayores);
+    }
+    static void MostrarLista(List<double> lista)
+    {
+        foreach (double dato in lista)
+        {
+            Console.WriteLine(dato);
+        }
+    }
+}
+
+
+
+
+
+
+
+Explicación del código:
+1.	Declaración de listas: Se declaran tres listas: una para almacenar todos los datos ingresados (listaPrincipal), otra para los datos menores o iguales al promedio (listaMenoresIgual), y una tercera para los datos mayores al promedio (listaMayores).
+2.	Entrada de datos: Se solicita al usuario ingresar la cantidad de datos que quiere agregar a la lista principal. Luego, se recorre un bucle donde se ingresan los datos y se añaden a listaPrincipal.
+3.	Cálculo del promedio: Se utiliza el método Average de LINQ para calcular el promedio de los datos en listaPrincipal.
+4.	Clasificación de datos: Se recorre listaPrincipal y se clasifican los datos en listaMenoresIgual o listaMayores según si son menores, iguales o mayores al promedio.
+5.	Mostrar resultados: Se muestran los datos de las listas y el promedio calculado utilizando el método MostrarLista.
+
+
+
+
+Crear un programa que maneje N° cantidad de datos de tipo entero en dos listas por el inicio.
+Debe existir un ciclo de carga para la primera lista y otro ciclo de carga para la a y otro ciclo de carga para la segunda lista. segunda lista.
+Una vez cargados los datos en las listas, el programa debe comparar las dos listas para verificar si ambas listas son iguales en verificar si ambas listas son iguales en tamaño y c tamaño y contenido, es decir que si tienen la misma obtenido, es decir que si tienen la misma cantidad de datos y si los datos están cargados en el mismo orden. Una vez realizada, la verificación. El programa debe mostrar:
+a.	Si las listas son Si las listas son iguales en tamaño y en iguales en tamaño y en contenido. contenido.
+b.	Si las listas son Si las listas son iguales en tamaño pero no en iguales en tamaño pero no en contenido. contenido.
+c.	No tienen el mismo tamaño ni No tienen el mismo tamaño ni contenido. contenido.
+Maneja dos listas de números enteros, las carga con datos ingresados por el usuario y luego las compara para verificar si son iguales en tamaño y contenido, iguales en tamaño pero no en contenido, o si no tienen el mismo tamaño ni contenido.
+using System;
+using System.Collections.Generic;
+class Program
+{
+    static void Main()
+    {
+        List<int> lista1 = new List<int>();
+        List<int> lista2 = new List<int>();
+        // Carga de la primera lista
+        Console.WriteLine("Ingrese la cantidad de datos para la primera lista:");
+        int cantidadDatos1 = int.Parse(Console.ReadLine());
+        for (int i = 0; i < cantidadDatos1; i++)
+        {
+            Console.WriteLine($"Ingrese el dato {i + 1} para la primera lista:");
+            int dato = int.Parse(Console.ReadLine());
+            lista1.Add(dato);
+        }
+        // Carga de la segunda lista
+        Console.WriteLine("Ingrese la cantidad de datos para la segunda lista:");
+        int cantidadDatos2 = int.Parse(Console.ReadLine());
+        for (int i = 0; i < cantidadDatos2; i++)
+        {
+            Console.WriteLine($"Ingrese el dato {i + 1} para la segunda lista:");
+            int dato = int.Parse(Console.ReadLine());
+            lista2.Add(dato);
+        }
+        // Comparación de las listas
+        bool sonIgualesEnTamano = lista1.Count == lista2.Count;
+        bool sonIgualesEnContenido = sonIgualesEnTamano && CompararListas(lista1, lista2);
+        // Mostrar resultados
+        if (sonIgualesEnContenido)
+        {
+            Console.WriteLine("Las listas son iguales en tamaño y en contenido.");
+        }
+        else if (sonIgualesEnTamano)
+        {
+            Console.WriteLine("Las listas son iguales en tamaño pero no en contenido.");
+        }
+        else
+        {
+            Console.WriteLine("Las listas no tienen el mismo tamaño ni contenido.");
+        }
+    }
+    static bool CompararListas(List<int> lista1, List<int> lista2)
+    {
+        for (int i = 0; i < lista1.Count; i++)
+        {
+            if (lista1[i] != lista2[i])
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+Explicación del código:
+1.	Declaración de listas: Se declaran dos listas (lista1 y lista2) para almacenar los datos ingresados por el usuario.
+2.	Entrada de datos para la primera lista: Se solicita al usuario la cantidad de datos que quiere agregar a la primera lista y luego se ingresan esos datos uno por uno.
+3.	Entrada de datos para la segunda lista: Se realiza el mismo proceso para la segunda lista.
+4.	Comparación de las listas:
+•	Se verifica si las listas son iguales en tamaño comparando lista1.Count con lista2.Count.
+•	Si son iguales en tamaño, se llama al método Comparar Listas para verificar si también son iguales en contenido.
+5.	Mostrar resultados: Se muestra en consola si las listas son iguales en tamaño y contenido, iguales en tamaño, pero no en contenido, o si no tienen el mismo tamaño ni contenido.
+6.	Método Comparar Listas: Este método compara elemento por elemento de las dos listas. Si encuentra alguna diferencia, devuelve false. Si todos los elementos son iguales, devuelve true.
